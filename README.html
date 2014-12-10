@@ -1,0 +1,68 @@
+<h1 id="tns2toad">Tns2Toad</h1>
+<p>Convert a tnsnames.ora into a file suitable for Toad to import into its connections grid.</p>
+<h2 id="file-list">File List</h2>
+<ul>
+<li>LICENSE - The MIT License file. Basically, you do what you like!</li>
+<li>README.md - This file in Markdown format.</li>
+<li>README.html - This file, in HTML format.</li>
+</ul>
+<h3 id="windows-only-files">Windows Only Files</h3>
+<ul>
+<li>antlr4.bat - A batch file to compile a *.g4 file into various Java classes, lexers and parsers.</li>
+<li>grun.bat - A file to test run parser rules. Read the ANTLR4 docs for details on the <a href="http://www.antlr.org">ANTLR</a> website. You might need to use this in debugging your grammar.</li>
+<li>build.bat - A batch file to compile the grammar, compile the Java files, build a jarfile (in the test subdirectory) and clean up after itself.</li>
+<li>antlr_shell.cmd - A batch file to set the Java and ALTLR4 environment. Run this first, before you try to do anything. You will need to edit the various folder names to match your system before doing anything though!</li>
+</ul>
+<h3 id="linuxunix-only-files">Linux/Unix Only Files</h3>
+<ul>
+<li>build.sh - Carries out a full compile and build from the grammar onwards. Creates a jar file in the test direcory.</li>
+<li>antlr_shell.sh - You need to &quot;source&quot; this file to set up the ANTLR4 environment <em>before</em> attempting to build anything. Edit this to set your own JAVA_HOME before use. See build.sh.</li>
+</ul>
+<h3 id="something-for-everyone">Something for Everyone!</h3>
+<ul>
+<li>tnsnames.g4 - this is the ANTLR4 grammar that defines the structure and semantics of a tnsnames.ora file as per the Oracle docs for 11gR2. However, it may be valid for previous, and subsequent versions too.</li>
+<li>tns2toad.java - This is the small, but almost perfectly formed Java class that kicks off and controls everything when the final build is complete.</li>
+<li>tns2toadListener.java - This class extends one of the Java classes created by the ANTLR4 build process and carries out all the hard work of creating your Toad sessions import file by parsing your tnsnames.ora file.</li>
+</ul>
+<h2 id="the-build">The Build</h2>
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+<li>Java 1.6 (aka Java 6) minimum. Has been built and tested with Java 6 and Java 7.</li>
+<li>antlr-4.4-complete.jar - downloaded from the <a href="http://www.antlr.org">ANTLR</a> Web site. There may be a later version.</li>
+<li>Toad 11.x or higher. This utility has been tested with Toad 11.6.</li>
+</ul>
+<h3 id="windows">Windows</h3>
+<ul>
+<li>Open a cmd window.</li>
+<li>cd to wherever the source is to be found.</li>
+<li>Execute the antlr_shell.cmd program.</li>
+<li>Execute the build.bat program. A tns2toad.jar file will be created in the test folder.</li>
+<li>Test - see below.</li>
+</ul>
+<h3 id="linus-and-unix.">Linus and Unix.</h3>
+<ul>
+<li>Open a shell session.</li>
+<li>cd to wherever the source lives.</li>
+<li>./build.sh to perform a full build. A tns2toad.jar will be created in the test directory.</li>
+<li>Test. See below.</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<p>From the build directory:</p>
+<ul>
+<li>cd test</li>
+<li>On Windows, execute the tns2toad.cmd passing parameters as described below.</li>
+<li>On Linux and Unix, execute the tns2toad.sh script passing parameters as described below.</li>
+</ul>
+<h3 id="parameters">Parameters</h3>
+<p>Output from the checker is passed to stdout. You can either ignore this and simply watch it whizz up the screen at high speed, or you can catch everything that would potentially whizz by, in a file by redirecting stdout to a file, as follows:</p>
+<h4 id="everything-to-the-screen">Everything to the Screen</h4>
+<p>Windows:</p>
+<pre><code>tns2toad tnsnames.ora</code></pre>
+<p>Linux/Unix:</p>
+<pre><code>./tns2toad.sh tnsnames.ora</code></pre>
+<h4 id="everyting-to-a-file">Everyting to a file</h4>
+<p>Windows:</p>
+<pre><code>tns2toad tnsnames.ora &gt;myconnections.txt</code></pre>
+<p>Linux/Unix:</p>
+<pre><code>./tns2toad.sh tnsnames.ora &gt;myconnections.txt</code></pre>
+<p>The file, myconnections.txt is now ready to be imported into Toad.</p>
